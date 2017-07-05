@@ -1,0 +1,118 @@
+@mixin respond-to($media) {
+  @if $media == medium-screens {
+    @media only screen and (max-width: 1024px) { @content; }
+  }
+  @else if $media == smaller-screens {
+     @media only screen and (max-width: 768px) { @content; } 
+  }
+  @else if $media == small-screens {
+     @media only screen and (max-width: 620px) { @content; } 
+    }
+}
+
+#section-2::before {
+	background: url('../images/voyager.png') no-repeat 0;
+	content: '';
+    position: absolute;
+    z-index: 1;
+    width: 65%;
+    height: 100%;
+    display: inline-block;
+    -webkit-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+    
+    @include respond-to(smaller-screens) { width: 100%; z-index: -1; }
+}
+
+#section-2 {
+    position: relative;
+    @include respond-to(smaller-screens) { background-color: rgba(black,0.3); }
+}
+
+.voyager
+{
+    padding: 5% 1% 5% 0;
+}
+
+.voyager__title
+{
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 60%;
+    max-width: 1000px;
+
+    text-align: right;
+    
+    @include respond-to(smaller-screens) { 
+    position: static;
+    z-index: none;
+    top: none;
+    transform: none;
+    max-width: none; }
+}
+
+.title__description
+{
+    color: white;
+}
+
+.voyager__passage
+{
+    position: relative;
+    z-index: 2;
+    margin-left: 40%;
+    max-width: 800px;
+    padding: 5% 5% 5% 5%;
+
+    border: 3px solid $dark-flesh;
+    
+    @include respond-to(smaller-screens) { 
+    position: static;
+    margin: 10%;}
+}
+
+.voyager__passage--left
+{
+    margin-left: 50%;
+    
+    @include respond-to(smaller-screens) { 
+    margin-left: 0;
+    color: white;}
+}
+
+// .voyager::after
+// {
+//     position: absolute;
+//     z-index: 2;
+//     right: 0;
+//     bottom: 0;
+//     margin: 0 7% 5% 0;
+
+//     width: 20%;
+//     height: 10px;
+
+//     content: '';
+
+//     background-color: white;
+// }
+
+// .voyager::before
+// {
+//     position: absolute;
+//     z-index: 3;
+//     right: 0;
+//     bottom: 0;
+//     margin: 0 15% -5% 0;
+
+//     width: 32px;
+//     height: 156px;
+
+//     content: '';
+//     transform: scale(.4);
+
+//     background: url('../images/sprite.png') 0 0 no-repeat;
+// }

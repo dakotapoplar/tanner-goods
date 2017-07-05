@@ -1,0 +1,208 @@
+@mixin respond-to($media) {
+  @if $media == medium-screens {
+    @media only screen and (max-width: 1024px) { @content; }
+  }
+  @else if $media == smaller-screens {
+     @media only screen and (max-width: 768px) { @content; } 
+  }
+  @else if $media == small-screens {
+     @media only screen and (max-width: 620px) { @content; } 
+    }
+}
+
+#section-1::before {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	width: 65%;
+	right: 0;
+	height: 100%;
+	display: inline-block;
+	background: url('../images/home-slider.png') no-repeat 100%;
+	-webkit-background-size: cover;
+	     -o-background-size: cover;
+	        background-size: cover;
+	
+	@include respond-to(small-screens) { 
+		background: url('../images/home-slider.png') no-repeat 30%;
+		-webkit-background-size: cover;
+	     -o-background-size: cover;
+		background-size: cover;
+		width: 100%; }
+}
+
+#section-1 {
+	position: relative;
+	margin-bottom: 100px;
+	
+	@include respond-to(small-screens) { min-height: 400px; height: 100vh; background-color: rgba(black,0.5); }
+}
+
+// NAVIGATION
+
+.top {
+	display: table;
+	width: 100%;
+	margin-bottom: 5%;
+}
+
+.top__logo {
+	padding-left: 1%;
+	width: 170px;
+	display: table-cell;
+	
+	@include respond-to(small-screens) { width: 100px; }
+}
+
+.top__navigation {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 4%;
+}
+
+.navigation__link-top {
+	margin: 0 1%;
+	font-family: 'MullerExtraBoldDemo';
+	font-size: 14px;
+	color: black;
+	
+	@include respond-to(small-screens) {
+	margin: 5%;
+	display: block;
+	color: white; 
+	text-align: right;}
+}
+
+.navigation__link-top::before {
+	content: '';
+	display: inline-block;
+	width: 30px;
+	vertical-align: middle;
+	margin-right: 10px;
+	border-bottom: 1px solid $dark-flesh;
+	opacity: 0;
+	margin-top: -3px;
+}
+
+.navigation__link-top::after {
+	content: '';
+	display: inline-block;
+	width: 4px;
+	height: 4px;
+	-webkit-border-radius: 10px;
+	        border-radius: 10px;
+	vertical-align: middle;
+	margin-left: 5px;
+	background: $dark-flesh;
+	opacity: 0;
+	margin-top: -3px;
+}
+
+.navigation__link-top:hover::before,
+.navigation__link-top:hover::after {
+	opacity: 100;
+}
+
+// SLIDER
+
+.slider {
+	padding-left: 1%;
+	position: absolute;
+	width: 170px;
+	
+	@include respond-to(medium-screens) { display: none; }
+}
+
+.slider__navigationUp {
+	cursor: pointer;
+	width: 50px;
+	height: 29px;
+	margin-left: 59px;
+	background: url('../images/sprite.png') -32px -82px no-repeat;
+	transform: scale(0.4);
+	margin-bottom: 10px;
+}
+
+.slider__navigationDown {
+	@extend .slider__navigationUp;
+	background: url('../images/sprite.png') -32px -53px no-repeat;
+	margin-bottom: 100px;
+}
+
+.slider__navigationDown::after {
+	content: '';
+	position: absolute;
+	height: 130px;
+	vertical-align: middle;
+	margin-right: 10px;
+	border-right: 3px solid $dark-flesh;
+	top: 250%;
+	right: 25%;
+}
+
+.slider__button {
+	color: $grey;
+	font-family: 'Montserrat';
+	font-size: 14px;
+	font-weight: 700;
+    text-align: center;
+    margin-bottom: 10%;
+    cursor: pointer;
+    transition: margin ease 0.1s;
+}
+
+.slider__button:hover {
+	width: 90px;
+    height: 90px;
+    line-height: 90px;
+	-webkit-border-radius: 100px;
+	        border-radius: 100px;
+	box-shadow: 5px 26px 81px rgba(0, 15, 26, 0.21);
+	background-color: rgba(135, 135, 135, 0);
+	color: black;
+	font-size: 32px;
+	font-weight: 400;
+	margin: 0 auto 20% auto;
+}
+
+// TITLE
+
+.title {
+	padding: 5% 0 15% 15%;
+	@include respond-to(medium-screens) { padding: 5% 0 15% 5%; }
+	@include respond-to(small-screens) { padding: 25% 0 0% 10%; }
+
+}
+
+.title__link {
+	color: $dark-flesh;
+	font-family: 'Montserrat';
+	font-size: 18px;
+	font-weight: 400;
+	padding-left: 5%;
+	
+	@include respond-to(small-screens) { color: white; 
+		padding: 10% 0 0 55%;
+	}
+}
+
+.title__link::before {
+	@extend .navigation__link-top::before;
+	opacity: 100;
+	@include respond-to(small-screens) { display: none; }
+}
+
+.title__link::after {
+	content: '';
+	display: inline-block;
+	width: 19px;
+	height: 34px;
+	vertical-align: middle;
+	margin-left: 5px;
+	background: url('../images/sprite.png') -113px -96px no-repeat;
+	transform: scale(0.4);
+}
+
+.title__link:hover {
+	color: darken($dark-flesh,15);
+}
